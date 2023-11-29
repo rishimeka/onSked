@@ -1,26 +1,37 @@
-import * as React from 'react';
-import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
-export default function Calendar() {
-  const [value, setValue] = React.useState(dayjs('2022-04-17'));
+import React, { Component } from 'react';
+import { Calendar } from '@fullcalendar/core';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-        <DemoItem >
-          <DateCalendar
-            defaultValue={dayjs('2022-04-17')}
-            style={{
-              width: '1400px', // Set the desired width
-              height: '1400px', // Set the desired height
-            }}
-          />
-        </DemoItem>
-      </DemoContainer>
-    </LocalizationProvider>
-  );
+class CalendarComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.calendarEl = React.createRef();
+  }
+
+  componentDidMount() {
+    this.initializeCalendar();
+  }
+
+  initializeCalendar() {
+    const { initialView, headerToolbar } = this.props;
+
+    this.calendar = new Calendar(this.calendarEl.current, {
+      plugins:[ timeGridPlugin ],
+  weekends:false,
+
+  events:[
+    { title: 'event 1', date: '2023-11-27', events: 'start=2013-12-01T00:00:00-05:00&end=2014-01-12T00:00:00-05:00' },
+    { title: 'event 2', date: '2023-11-29', events: 'start=2013-12-01T00:00:00-05:00&end=2014-01-12T00:00:00-05:00' }
+  ]
+    });
+
+    this.calendar.render();
+  }
+
+  render() {
+    return <div ref={this.calendarEl}></div>;
+  }
 }
+
+export default CalendarComponent;

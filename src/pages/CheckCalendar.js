@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar'
 import { Typography } from '@mui/material'
 import FilterButtonGroup from '../FilterButtonGroup/FilterButtonGroup'
 import Calendar from '../components/Calendar/Calendar'
+import UpcomingMeeting from '../components/Calendar/UpcomingMeeting'
 const CheckCalendar = () => {
   return (
     <div name="CheckCalendar">
@@ -38,6 +39,7 @@ const CheckCalendar = () => {
 
 </div>
 <Calendar></Calendar>
+
     </div>
   )
 }
