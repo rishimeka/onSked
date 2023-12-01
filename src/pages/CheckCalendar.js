@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar'
 import { Typography } from '@mui/material'
 import FilterButtonGroup from '../FilterButtonGroup/FilterButtonGroup'
 import Calendar from '../components/Calendar/Calendar'
+import {useState} from 'react'
 const CheckCalendar = () => {
   const [showFullCalendar, setShowFullCalendar] = useState(true);
 
@@ -24,7 +25,7 @@ const CheckCalendar = () => {
     fontWeight: 400,
     textAlign: 'left', // Shift to the left
     color: "grey",
-    marginLeft: "55px", 
+    marginLeft: "55px",
     marginTop: "30px"
   }}
 >
@@ -38,7 +39,7 @@ const CheckCalendar = () => {
     fontWeight: 600,
     textAlign: 'left', // Shift to the left
     color: "black",
-    marginLeft: "55px", 
+    marginLeft: "55px",
     marginTop: "10px"
   }}
 >

@@ -5,9 +5,10 @@ import {
     StaticDatePicker,
     StaticDateTimePicker
 } from "@mui/x-date-pickers";
-import {Button} from "@mui/material";
+import {Button, Paper} from "@mui/material";
 import dayjs from 'dayjs';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DesktopTimePicker} from "@mui/x-date-pickers";
 import {
     Box, Chip,
     FormControl,
@@ -23,8 +24,19 @@ import {useState} from "react";
 const NewMeeting = (props) => {
     const [meetingName, setMeetingName] = useState('');
     const [meetingNotes, setMeetingNotes] = useState('');
-    const [appointmentStartDateTime, setAppointmentStartDateTime] = useState('');
-    const [appointmentEndDateTime, setAppointmentEndDateTime] = useState('');
+    const [appointmentStartDate, setAppointmentStartDate] = useState('');
+    const [appointmentStartTime, setAppointmentStartTime] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
+    const timeOptions = [];
+    for (let i = 0; i <= 8; i++) {
+        const minutes = i * 15;
+        const hours = Math.floor(minutes / 60);
+        const formattedTime = `${hours ? hours + ':' : ''} ${minutes % 60} min`;
+        timeOptions.push(<MenuItem key={minutes} value={minutes}>{formattedTime}</MenuItem>);
+    }
+    const handleTimeChange = (event) => {
+        setSelectedTime(event.target.value);
+    };
     const names = [
         'Oliver Hansen',
         'Van Henry',
@@ -54,8 +66,8 @@ const NewMeeting = (props) => {
         meetingAttendees,
         location,
         meetingNotes,
-        appointmentStartDateTime,
-        appointmentEndDateTime,
+        appointmentStartDate,
+        appointmentStartTime,
     };
 
     // Update meeting name
@@ -75,12 +87,12 @@ const NewMeeting = (props) => {
 
     // Update appointment start date and time
     const handleAppointmentStartDateTimeChange = (value) => {
-        setAppointmentStartDateTime(value.$d);
+        setAppointmentStartDate(value.$d);
     };
 
 // Update appointment end date and time
-    const handleAppointmentEndDateTimeChange = (value) => {
-        setAppointmentEndDateTime(value.$d);
+    const handleAppointmentStartTimeChange = (value) => {
+        setAppointmentStartTime(value.$d);
     };
 
 
@@ -139,33 +151,41 @@ const NewMeeting = (props) => {
                                onChange={handleMeetingNotesChange}/>
                 </div>
                 <div style={{width: "50%", display: "flex", flexDirection: "column"}}>
-                    <text style={{fontSize: 20, fontWeight: 700, marginBottom: 10}}>Appointment Start Date and Time</text>
+                    <text style={{fontSize: 20, fontWeight: 700, marginBottom: 10}}>Appointment Start Date </text>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker
-                            label="Appointment Start Date and Time"
+                            label="Appointment Start Date"
                             viewRenderers={{
                                 hours: renderTimeViewClock,
                                 minutes: renderTimeViewClock,
                                 seconds: null,
                             }}
-                            sx={{maxWidth: '95%', marginBottom: 2}}
+                            sx={{marginBottom: 2}}
                             minDateTime={dayjs(new Date())}
                             onChange={handleAppointmentStartDateTimeChange}
                         />
                     </LocalizationProvider>
-                    <text style={{fontSize: 20, fontWeight: 700, marginBottom: 10}}>Appointment End Date and Time</text>
+                    {/*<div style={{display: 'flex', flexDirection: "row", marginBottom: 20, marginTop: 20}}>*/}
+                    {/*    <Paper sx={{marginRight: 2, padding: 2, backgroundColor: "#9CCFFC"}}>9:30 AM</Paper>*/}
+                    {/*    <Paper sx={{marginRight: 2, padding: 2, backgroundColor: "#9CCFFC"}}>9:30 AM</Paper>*/}
+                    {/*    <Paper sx={{marginRight: 2, padding: 2, backgroundColor: "#9CCFFC"}}>9:30 AM</Paper>*/}
+                    {/*    <Paper sx={{marginRight: 2, padding: 2, backgroundColor: "#9CCFFC"}}>9:30 AM</Paper>*/}
+                    {/*    <Paper sx={{marginRight: 2, padding: 2, backgroundColor: "#9CCFFC"}}>9:30 AM</Paper>*/}
+                    {/*</div>*/}
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateTimePicker
-                            label="Appointment End Date and Time"
-                            viewRenderers={{
-                                hours: renderTimeViewClock,
-                                minutes: renderTimeViewClock,
-                                seconds: null,
-                            }}
-                            sx={{maxWidth: '95%'}}
-                            minDateTime={dayjs(new Date())}
-                            onChange={handleAppointmentEndDateTimeChange}/>
-                    </LocalizationProvider>
+                    <text style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>Appointment Start Time</text>
+                    <DesktopTimePicker defaultValue={appointmentStartTime} />
+                        </LocalizationProvider>
+                    <text style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>Appointment Duration</text>
+
+                    <Select
+                        labelId="time-select-label"
+                        id="time-select"
+                        value={selectedTime}
+                        onChange={handleTimeChange}
+                    >
+                        {timeOptions}
+                    </Select>
                     <div style={{display: 'flex', flexDirection: "row", marginTop: "auto", marginLeft: "auto", marginRight: "5%"}}>
                         <Button variant="outlined" color="error" sx={{width: 100, marginRight: 2}} onClick={()=> {props.setNewMeetingToggle(false)}}>
                             Cancel

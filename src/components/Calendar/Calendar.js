@@ -18,16 +18,21 @@ class CalendarComponent extends Component {
 
     this.calendar = new Calendar(this.calendarEl.current, {
       plugins:[ timeGridPlugin ],
-  weekends:false,
+      weekends:false,
+      themeSystem: 'materia',
 
-  events:[
-    { title: 'event 1', date: '2023-11-27', events: 'start=2013-12-01T00:00:00-05:00&end=2014-01-12T00:00:00-05:00' },
-    { title: 'event 2', date: '2023-11-29', events: 'start=2013-12-01T00:00:00-05:00&end=2014-01-12T00:00:00-05:00' }
-  ]
+
+
+      events:[
+        { title: 'event 1', date: '2023-11-27', events: 'start=2013-12-01T00:00:00-05:00&end=2014-01-12T00:00:00-05:00' },
+        { title: 'event 2', date: '2023-11-29', events: 'start=2013-12-01T00:00:00-05:00&end=2014-01-12T00:00:00-05:00' }
+      ],
+
     });
-
     this.calendar.render();
   }
+
+
 
   render() {
     return <div ref={this.calendarEl}></div>;
