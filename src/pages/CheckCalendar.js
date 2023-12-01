@@ -1,9 +1,9 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import { Typography } from '@mui/material'
-import FilterButtonGroup from '../FilterButtonGroup/FilterButtonGroup'
-import Calendar from '../components/Calendar/Calendar'
-import {useState} from 'react'
+import React, { useState } from 'react';
+import Navbar from '../Navbar/Navbar';
+import { Typography } from '@mui/material';
+import FilterButtonGroup from '../FilterButtonGroup/FilterButtonGroup';
+import Calendar from '../components/Calendar/Calendar';
+
 const CheckCalendar = () => {
   const [showFullCalendar, setShowFullCalendar] = useState(true);
 
@@ -17,38 +17,37 @@ const CheckCalendar = () => {
 
   return (
     <div name="CheckCalendar">
-<Navbar/>
-<Typography
-  style={{
-    fontSize: '40px',
-    fontFamily: 'Roboto',
-    fontWeight: 400,
-    textAlign: 'left', // Shift to the left
-    color: "grey",
-    marginLeft: "55px",
-    marginTop: "30px"
-  }}
->
-  Hello,
-</Typography>
-<div style={{display: "flex"}}>
-<Typography
-  style={{
-    fontSize: '40px',
-    fontFamily: 'Roboto',
-    fontWeight: 600,
-    textAlign: 'left', // Shift to the left
-    color: "black",
-    marginLeft: "55px",
-    marginTop: "10px"
-  }}
->
- Thomas!
-</Typography>
-<FilterButtonGroup></FilterButtonGroup>
-
-</div>
-<Calendar></Calendar>
+      <Navbar />
+      <Typography
+        style={{
+          fontSize: '2.5rem', // 40px converted to rem
+          fontFamily: 'Roboto',
+          fontWeight: 400,
+          textAlign: 'left',
+          color: 'grey',
+          marginLeft: '3.4375rem', // 55px converted to rem
+          marginTop: '1.875rem', // 30px converted to rem
+        }}
+      >
+        Hello,
+      </Typography>
+      <div style={{ display: 'flex' }}>
+        <Typography
+          style={{
+            fontSize: '2.5rem', // 40px converted to rem
+            fontFamily: 'Roboto',
+            fontWeight: 600,
+            textAlign: 'left',
+            color: 'black',
+            marginLeft: '3.4375rem', // 55px converted to rem
+            marginTop: '1.0417rem', // 10px converted to rem
+          }}
+        >
+          Thomas!
+        </Typography>
+        <FilterButtonGroup></FilterButtonGroup>
+      </div>
+      <Calendar></Calendar>
     </div>
   );
 };

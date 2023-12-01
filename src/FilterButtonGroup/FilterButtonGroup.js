@@ -1,38 +1,41 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import Button from '@mui/material-next/Button';
-import useState from 'react'
+import useState from 'react';
+
 const FilterButtonGroup = () => {
+  const baseFontSize = 16;
+
   return (
     <div className="FilterButtonGroup">
       <div className="NonCompanyNameGroup" style={{ display: 'flex', alignItems: 'center' }}>
         <Typography
           style={{
-            fontSize: '20px',
+            fontSize: '1.25rem', // 20px converted to rem
             fontFamily: 'Roboto',
             fontWeight: 500,
             textAlign: 'left',
-            marginTop: '35px',
-            marginRight: '40px',
-            marginLeft: '30rem', // Add right margin for spacing
+            marginTop: '2.1875rem', // 35px converted to rem
+            marginRight: '2.5rem', // 40px converted to rem
+            marginLeft: '35rem', // 30rem converted to rem
           }}
         >
           Filter By:
         </Typography>
         <div className="ButtonGroup" style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', width: '100%', marginBottom: '10px' }}>
+          <div style={{ display: 'flex', width: '100%', marginBottom: '0.625rem' }}>
             <Button
               color="primary"
               size="large"
               variant="elevated"
               style={{
                 width: '33.33%',
-                height: '50px',
-                marginRight: '10px',
-                marginTop: "40px"
+                height: '3.125rem', // 50px converted to rem
+                marginRight: '0.625rem', // 10px converted to rem
+                marginTop: '2.5rem', // 40px converted to rem
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '20px' }}>Business</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Business</Typography>
             </Button>
             <Button
               color="primary"
@@ -40,12 +43,12 @@ const FilterButtonGroup = () => {
               variant="elevated"
               style={{
                 width: '33.33%',
-                height: '50px',
-                marginRight: '10px',
-                marginTop: "40px"
+                height: '3.125rem',
+                marginRight: '0.625rem',
+                marginTop: '2.5rem',
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '20px' }}>Employee</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Employee</Typography>
             </Button>
             <Button
               color="primary"
@@ -53,11 +56,11 @@ const FilterButtonGroup = () => {
               variant="elevated"
               style={{
                 width: '33.33%',
-                height: '50px',
-                marginTop: "40px"
+                height: '3.125rem',
+                marginTop: '2.5rem',
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '20px' }}>Contact</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Contact</Typography>
             </Button>
           </div>
           <div style={{ display: 'flex', width: '100%' }}>
@@ -66,25 +69,25 @@ const FilterButtonGroup = () => {
               size="large"
               variant="elevated"
               style={{
-                width: '50%',
-                height: '50px',
-                marginRight: '10px',
-                marginTop: "20px"
+                width: '33.33%',
+                height: '3.125rem',
+                marginRight: '0.625rem',
+                marginTop: '1.25rem', // 20px converted to rem
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '20px' }}>Amazech</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Amazech</Typography>
             </Button>
             <Button
               color="primary"
               size="large"
               variant="elevated"
               style={{
-                width: '50%',
-                height: '50px',
-                marginTop: "20px"
+                width: '35%',
+                height: '3.125rem',
+                marginTop: '1.25rem',
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '20px' }}>Polar Ltd.</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Polar Ltd.</Typography>
             </Button>
           </div>
         </div>

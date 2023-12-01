@@ -176,7 +176,7 @@ const NewMeeting = (props) => {
                     <text style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>Appointment Start Time</text>
                     <DesktopTimePicker defaultValue={appointmentStartTime} />
                         </LocalizationProvider>
-                    <text style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>Appointment Duration</text>
+                    <text style={{ fontSize: 20, fontWeight: 700, marginBottom: 10, marginTop: "1rem" }}>Appointment Duration</text>
 
                     <Select
                         labelId="time-select-label"
