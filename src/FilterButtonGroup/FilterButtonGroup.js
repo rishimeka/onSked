@@ -26,16 +26,15 @@ const FilterButtonGroup = () => {
           <div style={{ display: 'flex', width: '100%', marginBottom: '0.625rem' }}>
             <Button
               color="primary"
-              size="large"
+              size="medium"
               variant="elevated"
               style={{
-                width: '33.33%',
                 height: '3.125rem', // 50px converted to rem
                 marginRight: '0.625rem', // 10px converted to rem
                 marginTop: '2.5rem', // 40px converted to rem
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Business</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1rem', color: "#63B4FF" }}>Business</Typography>
             </Button>
             <Button
               color="primary"
@@ -48,7 +47,7 @@ const FilterButtonGroup = () => {
                 marginTop: '2.5rem',
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Employee</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1rem', color: "#63B4FF" }}>Employee</Typography>
             </Button>
             <Button
               color="primary"
@@ -60,7 +59,7 @@ const FilterButtonGroup = () => {
                 marginTop: '2.5rem',
               }}
             >
-              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: "#63B4FF" }}>Contact</Typography>
+              <Typography style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1rem', color: "#63B4FF" }}>Contact</Typography>
             </Button>
           </div>
           <div style={{ display: 'flex', width: '100%' }}>

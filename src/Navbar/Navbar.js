@@ -22,25 +22,11 @@ const pages = [
   { text: 'Help', fontSize: '1.25rem' }, // 20px / 16px = 1.25rem
 ];
 
-const popUpStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: '1rem', // 16px / 16px = 1rem
-};
-
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [newMeetingToggle, setNewMeetingToggle] = useState(false);
-  const [meetings, setMeetings] = React.useState([]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -59,29 +45,27 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'white' }}>
-      <Container maxWidth="xl">
+    <AppBar position="static" sx={{ backgroundColor: 'transparent' }} elevation={0}>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href=""
             sx={{
               mr: '1rem', // 16px / 16px = 1rem
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'flex', md: 'flex' },
               fontFamily: 'Roboto',
-              fontWeight: 700,
-              letterSpacing: '0.2rem', // 0.2px / 16px = 0.0125rem
+              fontWeight: 900,
+              margin:0,
               color: '#63B4FF',
               textDecoration: 'none',
-              fontSize: '3.75rem', // 60px / 16px = 3.75rem
-              '&:hover': {
-                color: 'skyblue',
-              },
+              fontSize: '1.75rem', // 60px / 16px = 3.75rem
+              marginLeft: '5rem'
+
             }}
           >
-            ONSked
+            OnSked
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -144,22 +128,8 @@ function Navbar() {
               marginRight: '3rem',
             }}
           >
-            <Button
-              style={{ marginLeft: 'auto', marginRight: '3.125rem', backgroundColor: '#63B4FF' }} // 50px / 16px = 3.125rem
-              variant="contained"
-              onClick={() => {
-                setNewMeetingToggle(!newMeetingToggle);
-              }}
-            >
-              Start New Meeting
-            </Button>
           </Box>
-          <Modal open={newMeetingToggle}>
-            <Box sx={popUpStyle}>
-              <NewMeeting setNewMeetingToggle={setNewMeetingToggle} setMeetings={setMeetings} meetings={meetings} />
-            </Box>
-          </Modal>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, marginRight: '5rem'}}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -189,7 +159,6 @@ function Navbar() {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
     </AppBar>
   );
 }
