@@ -57,7 +57,7 @@ const CalendarComponent = () => {
       headerToolbar: {
         left: '',
         center: '',
-        right: 'timeGridWeek,listPlugin',
+        right: '',
       },
       events: [],
     });

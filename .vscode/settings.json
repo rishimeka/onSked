@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/dedc41e9-e3c8-4ac3-a934-6a8fa9820c6e/resourceGroups/onsked-utd/providers/Microsoft.Web/sites/wafe-onskeddev2",
+    "appService.deploySubpath": "."
+}
