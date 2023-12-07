@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../Navbar/Navbar';
-import { Typography } from '@mui/material';
-import FilterButtonGroup from '../FilterButtonGroup/FilterButtonGroup';
+import {Typography} from '@mui/material';
 import Calendar from '../components/Calendar/Calendar';
 
 const CheckCalendar = () => {
-  const [showFullCalendar, setShowFullCalendar] = useState(true);
-
-  const handleFullCalendarClick = () => {
-    setShowFullCalendar(true);
-  };
-
-  const handleCheckCalendarClick = () => {
-    setShowFullCalendar(false);
-  };
 
   return (
     <div name="CheckCalendar">

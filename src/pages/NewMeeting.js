@@ -1,31 +1,14 @@
-import {
-    DateTimePicker,
-    LocalizationProvider,
-    renderTimeViewClock,
-    StaticDatePicker,
-    StaticDateTimePicker
-} from "@mui/x-date-pickers";
-import {Button, Paper} from "@mui/material";
+import {DateTimePicker, DesktopTimePicker, LocalizationProvider, renderTimeViewClock} from "@mui/x-date-pickers";
+import {Box, Button, Chip, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import dayjs from 'dayjs';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DesktopTimePicker} from "@mui/x-date-pickers";
-import {
-    Box, Chip,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    OutlinedInput,
-    Select,
-    SelectChangeEvent,
-    TextField
-} from "@mui/material";
 import {useState} from "react";
 
 const NewMeeting = (props) => {
     const [meetingName, setMeetingName] = useState('');
     const [meetingNotes, setMeetingNotes] = useState('');
     const [appointmentStartDate, setAppointmentStartDate] = useState('');
-    const [appointmentStartTime, setAppointmentStartTime] = useState('');
+    const [appointmentStartTime] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const timeOptions = [];
     for (let i = 0; i <= 8; i++) {
@@ -91,9 +74,9 @@ const NewMeeting = (props) => {
     };
 
 // Update appointment end date and time
-    const handleAppointmentStartTimeChange = (value) => {
-        setAppointmentStartTime(value.$d);
-    };
+//     const handleAppointmentStartTimeChange = (value) => {
+//         setAppointmentStartTime(value.$d);
+//     };
 
 
     return(

@@ -1,5 +1,5 @@
 import { Calendar } from '@fullcalendar/core';
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment';
 import Button from '@mui/material/Button';
@@ -43,10 +43,10 @@ const CalendarComponent = () => {
     setEndDate(endDate.clone().add(1, 'weeks'));
   };
 
-  const initializeCalendar = () => {
+  const initializeCalendar = useCallback(() => {
     const calendar = new Calendar(calendarEl.current, {
       plugins: [timeGridPlugin,listPlugin],
-      
+
       weekends: false,
       themeSystem: 'materia',
       initialDate: startDate.toDate(),
@@ -62,7 +62,7 @@ const CalendarComponent = () => {
       events: [],
     });
     calendar.render();
-  };
+  }, [endDate, startDate]);
 
   const addDurationToDate = (dateString, durationMinutes) => {
     const dateMoment = moment(dateString, 'YYYY-MM-DDHH:mm:ss.SSSSSSS');
@@ -97,7 +97,7 @@ const CalendarComponent = () => {
 
   useEffect(() => {
     initializeCalendar();
-  }, [eventsData, startDate, endDate]);
+  }, [initializeCalendar, eventsData, startDate, endDate]);
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') {

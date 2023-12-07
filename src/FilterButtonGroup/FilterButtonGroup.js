@@ -1,11 +1,8 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import {Typography} from '@mui/material';
 import Button from '@mui/material-next/Button';
-import useState from 'react';
 
 const FilterButtonGroup = () => {
-  const baseFontSize = 16;
-
   return (
     <div className="FilterButtonGroup">
       <div className="NonCompanyNameGroup" style={{ display: 'flex', alignItems: 'center' }}>

@@ -1,10 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import NewMeeting from "./pages/NewMeeting";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import CheckCalendar from "./pages/CheckCalendar";
 
 function App() {
