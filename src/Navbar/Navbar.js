@@ -66,8 +66,9 @@ function Navbar() {
             }}
           >
             OnSked
-          </Typography>
+            <h6 className="naw" style={{color: "black", fontSize: "1rem", marginLeft: "-6rem"}}>Where Time Meets Technology</h6>
 
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"

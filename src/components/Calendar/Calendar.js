@@ -4,13 +4,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import {Fab, Typography} from "@mui/material";
+import { Fab, Typography, Snackbar } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddIcon from '@mui/icons-material/Add';
 import Box from "@mui/material/Box";
 import NewMeeting from "../../pages/NewMeeting";
 import Modal from "@mui/material/Modal";
-
+import listPlugin from '@fullcalendar/list';
+import MuiAlert from '@mui/material/Alert';
 const popUpStyle = {
   position: 'absolute',
   top: '50%',
@@ -20,15 +21,16 @@ const popUpStyle = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: '1rem', // 16px / 16px = 1rem
+  p: '1rem',
 };
+
 const CalendarComponent = () => {
   const [newMeetingToggle, setNewMeetingToggle] = useState(false);
   const [meetings, setMeetings] = React.useState([]);
-
   const [startDate, setStartDate] = useState(moment().startOf('week'));
   const [endDate, setEndDate] = useState(moment().endOf('week'));
-  const [eventsData, setEventsData] = useState([]); // State to store events data
+  const [eventsData, setEventsData] = useState([]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const calendarEl = useRef(null);
 
   const handleLeftClick = () => {
@@ -43,31 +45,25 @@ const CalendarComponent = () => {
 
   const initializeCalendar = () => {
     const calendar = new Calendar(calendarEl.current, {
-      plugins: [timeGridPlugin],
+      plugins: [timeGridPlugin,listPlugin],
+      
       weekends: false,
       themeSystem: 'materia',
       initialDate: startDate.toDate(),
-
       visibleRange: {
         start: startDate.toDate(),
         end: endDate.toDate(),
       },
-      // businessHours: [
-      //   {
-      //     daysOfWeek: [ 1, 2, 3, 4, 5 ], // Monday, Tuesday, Wednesday...
-      //     startTime: '08:00', // 8am
-      //     endTime: '20:00' // 8pm
-      //   },
-      // ],
       headerToolbar: {
         left: '',
         center: '',
-        right: '',
+        right: 'timeGridWeek,listPlugin',
       },
-      events: [], // Use eventsData to populate calendar events
+      events: [],
     });
     calendar.render();
-  }
+  };
+
   const addDurationToDate = (dateString, durationMinutes) => {
     const dateMoment = moment(dateString, 'YYYY-MM-DDHH:mm:ss.SSSSSSS');
     const endDate = dateMoment.add(durationMinutes, 'minutes').format('YYYY-MM-DDHH:mm:ss.SSSSSSS');
@@ -79,8 +75,8 @@ const CalendarComponent = () => {
       try {
         const response = await axios.get(`localhost:8081/schedule/records-for-week?StartDate=2023-11-07&EndDate=2023-12-07&customerId=0e3fc6a8-046d-45b0-aff7-93d2d9cf1e10`);
         console.log(response.data);
-        if(response.data){
-          const updatedEventsData = response.data.map((event) => {
+        if (response.data) {
+          const updatedEventsData = response.data.payload.appointments.map((event) => {
             const str = addDurationToDate(event.date + "T" + event.startTime, '45');
             return {
               title: event.title,
@@ -92,6 +88,7 @@ const CalendarComponent = () => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        setSnackbarOpen(true);
       }
     };
 
@@ -102,34 +99,51 @@ const CalendarComponent = () => {
     initializeCalendar();
   }, [eventsData, startDate, endDate]);
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
   return (
-      <div style={{ marginTop: '3rem', width: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-          <Button style={{ marginLeft: '5rem', backgroundColor: '#63B4FF' }} variant="contained" onClick={handleLeftClick}>
-            Previous Week
+    <div style={{ marginTop: '3rem', width: '100%' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <Button style={{ marginLeft: '5rem', backgroundColor: '#63B4FF' }} variant="contained" onClick={handleLeftClick}>
+          Previous Week
+        </Button>
+        <Typography variant="h5" style={{ marginLeft: "7.5rem" }}>{startDate.clone().add(1, 'days').format('MM/DD/YY')} - {endDate.clone().add(-1, 'days').format('MM/DD/YY')}</Typography>
+        <div style={{ marginRight: '5rem' }}>
+          <Button style={{ marginRight: '0.75rem', backgroundColor: '#63B4FF' }} variant="contained" onClick={handleRightClick}>
+            Next Week
           </Button>
-          <Typography variant="h5" style={{marginLeft:"7.5rem"}}>{startDate.clone().add(1, 'days').format('MM/DD/YY')} - {endDate.clone().add(-1, 'days').format('MM/DD/YY')}</Typography>
-          <div style={{ marginRight: '5rem' }}>
-            <Button style={{ marginRight: '0.75rem', backgroundColor: '#63B4FF' }} variant="contained" onClick={handleRightClick}>
-              Next Week
-            </Button>
-            <Fab disabled variant="circular" size="small" color="primary" style={{marginRight: '0.75rem'}}>
-              <FilterAltIcon  />
-            </Fab>
-            <Fab variant="circular" size="small" color="primary" onClick={() => {
-              setNewMeetingToggle(!newMeetingToggle);
-            }}>
-              <AddIcon  />
-            </Fab>
-          </div>
+          <Fab disabled variant="circular" size="small" color="primary" style={{ marginRight: '0.75rem' }}>
+            <FilterAltIcon />
+          </Fab>
+          <Fab variant="circular" size="small" color="primary" onClick={() => {
+            setNewMeetingToggle(!newMeetingToggle);
+          }}>
+            <AddIcon />
+          </Fab>
         </div>
-        <div style={{ marginTop: '1rem', marginLeft: '5rem', marginRight: '5rem' }} ref={calendarEl}></div>
-        <Modal open={newMeetingToggle}>
-          <Box sx={popUpStyle}>
-            <NewMeeting setNewMeetingToggle={setNewMeetingToggle} setMeetings={setMeetings} meetings={meetings} />
-          </Box>
-        </Modal>
       </div>
+      <div style={{ marginTop: '1rem', marginLeft: '5rem', marginRight: '5rem' }} ref={calendarEl}></div>
+      <Modal open={newMeetingToggle}>
+        <Box sx={popUpStyle}>
+          <NewMeeting setNewMeetingToggle={setNewMeetingToggle} setMeetings={setMeetings} meetings={meetings} />
+        </Box>
+      </Modal>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message="Error fetching data"
+      >
+         <MuiAlert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+    Error fetching
+  </MuiAlert>
+      </Snackbar>
+    </div>
   );
 };
 
