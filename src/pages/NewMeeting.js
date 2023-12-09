@@ -160,7 +160,7 @@ const NewMeeting = (props) => {
           >
             {timeOptions}
           </Select>
-          <Typography>Recurring Meeting</Typography>
+          <Typography style={{ fontSize: 20, fontWeight: 700, marginBottom: 3, marginTop: "1rem" }} >Recurring Meeting</Typography>
           <Switch
             checked={isRecurring}
             onChange={() => setIsRecurring(!isRecurring)}
